@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Setting</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    text-align: center; /* จัดข้อความทั้งหมดใน body ให้อยู่ตรงกลาง */
+  }
+
+  form {
+    display: inline-block; /* ทำให้ form มีขนาดเท่ากับเนื้อหาและอยู่ตรงกลาง */
+    text-align: left; /* จัดข้อความใน form ให้อยู่ด้านซ้าย */
+    margin: 0 auto; /* จัดกลาง form โดยอัตโนมัติ */
+  }
+
+  label { 
+    display: inline-flex; /* ใช้ inline-flex เพื่อให้อยู่บรรทัดเดียวกัน */
+    align-items: center; /* จัดแนวกลางระหว่างไอคอนกับข้อความ */
+    margin-bottom: 10px;
+    font-size: 16px; /* ปรับขนาดฟอนต์ */
+    margin-right: 15px; /* เพิ่มระยะห่างระหว่างปุ่ม radio */
+  }
+
+  .inline {
+    margin-right: 10px;
+  }
+
+  img {
+    width: 24px; /* ปรับขนาดไอคอน */
+    height: 24px;
+    margin-right: 8px; /* เพิ่มระยะห่างระหว่างไอคอนกับข้อความ */
+  }
+
+  input[type="radio"] {
+    margin-right: 8px; /* เพิ่มระยะห่างระหว่าง radio button กับไอคอน */
+  }
+
+  button {
+  background-color: #4CAF50; /* สีพื้นหลังของปุ่ม */
+  border: none; /* ไม่ต้องการขอบ */
+  color: white; /* สีข้อความ */
+  padding: 10px; /* ปรับขนาด padding ให้เหมาะสม */
+  width: 33.33%; /* ขนาดปุ่ม 1/3 ของหน้าจอ */
+  text-align: center; /* จัดข้อความให้ตรงกลาง */
+  text-decoration: none; /* ไม่ต้องการเส้นใต้ */
+  display: inline-block; /* ให้ปุ่มอยู่ในบรรทัดเดียวกับเนื้อหาอื่น */
+  font-size: 16px; /* ขนาดของข้อความ */
+  margin: 20px auto; /* ช่องว่างด้านบนและล่างของปุ่ม พร้อมจัดกลาง */
+  cursor: pointer; /* เปลี่ยนเคอร์เซอร์เมื่อวางเมาส์ */
+  border-radius: 5px; /* มุมปุ่มโค้งมน */
+  transition: background-color 0.3s, box-shadow 0.3s; /* เอฟเฟกต์การเปลี่ยนสีพื้นหลัง */
+}
+
+button:hover {
+  background-color: #45a049; /* เปลี่ยนสีเมื่อวางเมาส์บนปุ่ม */
+}
+
+button:active {
+  background-color: #388e3c; /* สีเมื่อคลิกปุ่ม */
+  box-shadow: 0 5px #666; /* เงาสำหรับปุ่ม */
+  transform: translateY(4px); /* ทำให้ปุ่มดูเหมือนยุบลงเมื่อคลิก */
+}
+
+</style>
+
+</head>
+<body>
+
+<h2>Setting</h2>
+
+<form id="settingForm">
+
+  <label for="intervalTime" id="intervalTimeLabel">Clear Interval Time (in milliseconds):</label> <br>
+  <input type="range" id="intervalTime" min="1" max="15" value="5" onchange="updateLabel('intervalTimeLabel', 'intervalTime' , 'ระยะเวลารวม ',' นาที (ตำ่สูง 1 นาที สูงสุด 15 นาที)')"><br><br>
+
+  <label for="blinkTimeCell1" id="blinkTimeCell1Label">ระยะเวลาเตรียมตัวกลางคอร์ท 3 วินาที (ตำ่สุด 1 วินาที สูงสุด 5 วินาที)</label> <br>
+  <input type="range" id="blinkTimeCell1" min="1" max="5" value="3" onchange="updateLabel('blinkTimeCell1Label', 'blinkTimeCell1','ระยะเวลาเตรียมตัวกลางคอร์ท ',' วินาที (ตำ่สุด 1 วินาที สูงสุด 5 วินาที)')"><br><br>
+
+  <label for="blinkTimeCell2" id="blinkTimeCell2Label">Blinking Time for Cell2 (in milliseconds):</label> <br>
+  <input type="range" id="blinkTimeCell2" min="1" max="5" value="3" onchange="updateLabel('blinkTimeCell2Label', 'blinkTimeCell2','ระยะเวลาวิ่งไป-กลับ ',' วินาที (ตำ่สุด 1 วินาที สูงสุด 5 วินาที)')"><br><br>
+  
+  <label>Customize</label><br>
+  <label>
+    <input type="radio" id="option1" name="cameraAngles" value="8 มุม ทั่วสนาม" onchange="setCameraPositions()">
+    <img src="image/9_8.ico" alt="8 มุม ทั่วสนาม"> 
+    8 มุม ทั่วสนาม
+  </label> <br>
+  
+  <label>
+    <input type="radio" id="option2" name="cameraAngles" value="6 มุม" onchange="setCameraPositions()">
+    <img src="image/9-6.ico" alt="6 มุม"> 
+    6 มุม
+  </label> <br>
+
+  <label>
+    <input type="radio" id="option3" name="cameraAngles" value="5 มุม ด้านหน้ากับด้านข้าง" onchange="setCameraPositions()">
+    <img src="image/9-5.ico" alt="5 มุม ด้านหน้ากับด้านข้าง"> 
+    5 มุม ด้านหน้ากับด้านข้าง
+  </label> <br>
+  
+  <label>
+    <input type="radio" id="option4" name="cameraAngles" value="4 มุม" onchange="setCameraPositions()">
+    <img src="image/9-4.ico" alt="4 มุม"> 
+    4 มุม
+  </label> <br>
+
+  <label>
+    <input type="radio" id="option4" name="cameraAngles" value="2 มุม ซ้ายขวา" onchange="setCameraPositions()">
+    <img src="image/9-2 ซ้ายขวา.ico" alt="2 มุม ซ้ายขวา"> 
+    2 มุม ซ้ายขวา
+  </label> <br>
+
+  <label>
+    <input type="radio" id="option4" name="cameraAngles" value="2 มุม หน้าหลัง" onchange="setCameraPositions()">
+    <img src="image/9-2 หน้าหลัง.ico" alt="2 มุม หน้าหลัง"> 
+    2 มุม หน้าหลัง
+  </label> <br>
+
+  
+</form> 
+<br>
+<button type="button" onclick="setSettings()">Start</button>
+<script src="setting.js"></script> 
+ 
+</body> 
+</html>
